@@ -6,7 +6,6 @@ import {
 	TableContainer,
 	TableHead,
 	TablePagination,
-	Typography,
 	TableRow,
 	Paper,
 	Box,
@@ -15,9 +14,8 @@ import {
 import NotFoundSVG from "../../assets/NotFoundSVG";
 import classes from "./employeeTable.module.css";
 import { filterEmployees, getColumnLabels } from "../../utils/employeeUtils";
-import { Link } from "react-router-dom";
 import SearchEmployee from "../../components/searchEmployeeTable/SearchEmployee";
-import EmployeeTableRow from "../../components/EmployeeTableRow";
+import EmployeeTableRow from "../../components/employeeTableRow/EmployeeTableRow";
 
 export default function StickyHeadTable() {
 	const [employees, setEmployees] = useState([]);
@@ -169,7 +167,11 @@ export default function StickyHeadTable() {
 													<TableCell
 														key={label}
 														align="center"
-														style={{ minWidth: "170" }}
+														style={{
+															minWidth: "170",
+															background: "rgb(44 48 54)",
+															color: "white",
+														}}
 														className={classes.tableCell}
 													>
 														{label.replaceAll("_", " ")}

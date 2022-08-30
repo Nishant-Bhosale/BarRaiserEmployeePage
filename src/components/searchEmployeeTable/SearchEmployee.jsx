@@ -34,8 +34,9 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 			<Box
 				sx={{
 					display: "flex",
-					justifyContent: "center",
+					justifyContent: "flex-start",
 					alignItems: "center",
+					marginLeft: "2.05rem",
 				}}
 			>
 				<TextField
