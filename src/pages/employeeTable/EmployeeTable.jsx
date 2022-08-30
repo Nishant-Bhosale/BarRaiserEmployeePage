@@ -17,14 +17,18 @@ import { filterEmployees, getColumnLabels } from "../../utils/employeeUtils";
 import SearchEmployee from "../../components/searchEmployeeTable/SearchEmployee";
 import EmployeeTableRow from "../../components/employeeTableRow/EmployeeTableRow";
 
-export default function StickyHeadTable() {
+export default function EmployeeTable() {
+	//Employee States
 	const [employees, setEmployees] = useState([]);
 	const [filteredEmployees, setFilteredEmployees] = useState([]);
 	const [designations, setDesignations] = useState([]);
-	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(25);
 	const [isLoading, setIsLoading] = useState(true);
 
+	// Pagintion States
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(25);
+
+	// Fetching data in useEffect
 	useEffect(() => {
 		fetch(
 			"https://opensheet.elk.sh/1gH5Kle-styszcHF2G0H8l1w1nDt1RhO9NHNCpHhKK0M/employees",
@@ -51,26 +55,32 @@ export default function StickyHeadTable() {
 	};
 
 	const getRowValues = (data) => {
+		// Declare set to store designations dynamically
 		const uniqueDesignations = new Set();
 		uniqueDesignations.add("All");
 		const transformedData = data.map((emp) => {
+			// Remove details property
 			const { details, ...rest } = emp;
 
 			uniqueDesignations.add(rest.designation);
 
+			// Replace Id with array containing the following fields
 			rest.id = [rest.id, rest.first_name, details];
 
 			return rest;
 		});
 
+		// Use spread operator to copy contents of Set
 		const arr = [...uniqueDesignations];
 
 		setDesignations(arr);
 		return transformedData;
 	};
 
+	// Search Input
 	const [searchInput, setSearchInput] = useState({ name: "", des: "All" });
 
+	// Function to search employees by firstName, lastName, Address etc.
 	const handleSearch = (name, des) => {
 		let filteredData;
 		if (name === "") {
@@ -78,6 +88,7 @@ export default function StickyHeadTable() {
 			return;
 		}
 
+		// Condition if filtered employees already exist
 		if (filteredEmployees.length && des !== "All") {
 			filteredData = filterEmployees(filteredEmployees, name);
 			setFilteredEmployees(filteredData);
@@ -88,11 +99,14 @@ export default function StickyHeadTable() {
 		setFilteredEmployees(filteredData);
 	};
 
+	// Function to filter employee by designation
 	const handleFilter = (des) => {
+		// If no filter selected return the employees
 		if (des === "All") {
 			setFilteredEmployees([]);
 		}
 
+		// Filter Employees by designation
 		const filteredData = employees.filter((employee) => {
 			return employee.designation === des;
 		});
@@ -100,14 +114,17 @@ export default function StickyHeadTable() {
 		setFilteredEmployees(filteredData);
 	};
 
+	// Function to reset fields
 	const resetDetails = () => {
 		setSearchInput({ name: "", des: "All" });
 	};
 
+	// Re-renders list every time search input changes
 	useEffect(() => {
 		handleSearch(searchInput.name, searchInput.des);
 	}, [searchInput]);
 
+	// Show loader if state is loading
 	if (isLoading) {
 		return (
 			<Box
@@ -167,6 +184,7 @@ export default function StickyHeadTable() {
 								<Table stickyHeader aria-label="sticky table">
 									<TableHead>
 										<TableRow>
+											{/* dynamically getting the labels of employee, so no need to hardcode in future */}
 											{getColumnLabels(employees[0]).map((label, idx) => {
 												return (
 													<TableCell
@@ -209,9 +227,7 @@ export default function StickyHeadTable() {
 								</Table>
 							</TableContainer>
 						)}
-						{searchInput.name && filteredEmployees.length === 0 ? (
-							<p></p>
-						) : (
+						{!(searchInput.name && filteredEmployees.length === 0) && (
 							<TablePagination
 								rowsPerPageOptions={[10, 25, 100]}
 								component="div"

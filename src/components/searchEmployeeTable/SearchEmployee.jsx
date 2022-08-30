@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-	InputLabel,
 	Select,
 	MenuItem,
 	TextField,
@@ -12,6 +11,7 @@ import {
 const SearchEmployee = ({ input, search, designations, filterEmp, reset }) => {
 	const [designation, setDesignation] = useState(designations[0]);
 
+	// Handling search input
 	const handleInput = (e) => {
 		const { name, value } = e.target;
 
@@ -22,11 +22,13 @@ const SearchEmployee = ({ input, search, designations, filterEmp, reset }) => {
 		}));
 	};
 
+	// Handling Filter Call
 	const handleFilter = (e) => {
 		filterEmp(e.target.value);
 		setDesignation(e.target.value);
 	};
 
+	// Handling Reset
 	const resetDetails = () => {
 		reset();
 	};
@@ -64,6 +66,7 @@ const SearchEmployee = ({ input, search, designations, filterEmp, reset }) => {
 						margin: "1rem 2rem",
 						backgroundColor: "#0084ff",
 						color: "white",
+						textAlign: "center",
 					}}
 				>
 					{designations.map((designation) => {

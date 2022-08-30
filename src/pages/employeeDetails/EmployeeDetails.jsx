@@ -15,8 +15,10 @@ import {
 import NotFoundSVG from "../../assets/NotFoundSVG";
 
 const EmployeeDetails = () => {
+	// Extracting name from parameters
 	const { name } = useParams();
 
+	// States
 	const [employee, setEmployee] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -39,6 +41,7 @@ const EmployeeDetails = () => {
 		getEmployeeDetails();
 	}, []);
 
+	// Show loader if state is loading
 	if (isLoading) {
 		return (
 			<Box
@@ -49,6 +52,7 @@ const EmployeeDetails = () => {
 		);
 	}
 
+	// If no employee with the given name or id is found
 	if (!Object.keys(employee).length) {
 		return (
 			<>

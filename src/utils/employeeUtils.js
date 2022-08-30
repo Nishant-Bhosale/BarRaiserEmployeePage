@@ -1,4 +1,6 @@
+// Utility functions
 const filterEmployees = (employees, name, des) => {
+	// Filtering data using regex
 	const filteredData = employees.filter((employee) => {
 		const regex = new RegExp(`${name}`, "gi");
 		return (
@@ -13,6 +15,7 @@ const filterEmployees = (employees, name, des) => {
 	return filteredData;
 };
 
+// Getting the keys of an object
 const getColumnLabels = (emp) => {
 	return Object.keys(emp);
 };

@@ -7,10 +7,12 @@ import {
 import EmployeeTable from "./pages/employeeTable/EmployeeTable";
 import EmployeeDetails from "./pages/employeeDetails/EmployeeDetails";
 import HierarchyPage from "./pages/hierarchyPage/HierarchyPage";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
 	return (
 		<Router>
+			<Navbar />
 			<Routes>
 				<Route path="/" element={<EmployeeTable />} />
 				<Route path="/:name" element={<EmployeeDetails />} />

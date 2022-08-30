@@ -1,0 +1,16 @@
+.link {
+	text-decoration: none;
+	color: black;
+	padding: 1rem 2rem;
+	background-color: transparent;
+	margin: 1rem;
+	border: 1px solid gray;
+	border-radius: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+}
+
+.active {
+	background-color: #1976d2;
+	color: white;
+}
