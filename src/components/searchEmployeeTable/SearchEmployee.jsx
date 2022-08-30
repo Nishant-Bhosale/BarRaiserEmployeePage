@@ -28,7 +28,7 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 
 	return (
 		<>
-			<Typography variant="h3" marginBottom="2rem" align="center">
+			<Typography variant="h4" marginBottom="2rem" align="center">
 				Search And Filter
 			</Typography>
 			<Box
@@ -39,7 +39,7 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 				}}
 			>
 				<TextField
-					label="Name"
+					label="Name/Address/Id/DOB"
 					variant="outlined"
 					placeholder="Search By Employee Name Here..."
 					type="search"
@@ -47,7 +47,6 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 					onChange={handleInput}
 					value={input.name}
 					id="search-name"
-					margin="0 2rem"
 				/>
 
 				<Box
@@ -61,7 +60,12 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 						id="demo-simple-select"
 						value={designation}
 						onChange={handleFilter}
-						sx={{ width: "224px", margin: "1rem 2rem" }}
+						sx={{
+							width: "224px",
+							margin: "1rem 2rem",
+							backgroundColor: "#0084ff",
+							color: "white",
+						}}
 					>
 						{designations.map((designation) => {
 							return (

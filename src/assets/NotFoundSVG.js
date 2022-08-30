@@ -3,13 +3,14 @@ import React from "react";
 const notFoundSVG = () => {
 	return (
 		<svg
-			width="612"
-			height="401"
+			width="467"
+			height="275"
 			viewBox="0 0 612 401"
+			margin="auto"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<g clip-path="url(#clip0_1_2)">
+			<g clipPath="url(#clip0_1_2)">
 				<path
 					d="M601.33 94.54L591.76 140.88L585.6 134.88L575.12 142.35L567.11 132.41L549.15 145.47L533.8 119.8L516.68 129.83L509.89 120.46L488.15 132.71L481.61 118.71L496.85 44.9L578.55 61.77L601.33 94.54Z"
 					fill="#EBEBEB"
@@ -589,18 +590,18 @@ const notFoundSVG = () => {
 				<path
 					d="M489.99 268.58C490.64 268.44 491.29 268.29 491.93 268.13"
 					stroke="#263238"
-					stroke-miterlimit="10"
+					strokeMiterlimit="10"
 				/>
 				<path
 					d="M495.77 266.99C511.07 261.82 523.88 249.79 525.08 235.73C527.74 204.73 489.99 187.61 493.89 151.79C497.61 117.62 533.45 115.18 547.82 119.9C563.69 125.12 558.25 140.37 543.88 138.4C518.97 134.99 503.31 107.91 515.14 77.19C523.98 54.24 546.02 45.58 554.97 42.94"
 					stroke="#263238"
-					stroke-miterlimit="10"
-					stroke-dasharray="4 4"
+					strokeMiterlimit="10"
+					strokeDasharray="4 4"
 				/>
 				<path
 					d="M556.9 42.41C558.13 42.09 558.84 41.96 558.84 41.96"
 					stroke="#263238"
-					stroke-miterlimit="10"
+					strokeMiterlimit="10"
 				/>
 				<path
 					d="M574.7 36.43C572.15 28.53 555.07 31.37 558.4 41.7C561.73 52.03 577.25 44.34 574.7 36.43Z"

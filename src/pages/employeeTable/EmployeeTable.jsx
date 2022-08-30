@@ -17,6 +17,7 @@ import classes from "./employeeTable.module.css";
 import { filterEmployees, getColumnLabels } from "../../utils/employeeUtils";
 import { Link } from "react-router-dom";
 import SearchEmployee from "../../components/searchEmployeeTable/SearchEmployee";
+import EmployeeTableRow from "../../components/EmployeeTableRow";
 
 export default function StickyHeadTable() {
 	const [employees, setEmployees] = useState([]);
@@ -139,90 +140,80 @@ export default function StickyHeadTable() {
 							align: "center",
 						}}
 					>
-						<TableContainer
-							sx={{
-								maxHeight: "90vh",
-								minHeight: "85vh",
-								"&::-webkit-scrollbar": {
-									width: 10,
-								},
-								"&::-webkit-scrollbar-track": {
-									backgroundColor: "transparent",
-								},
-								"&::-webkit-scrollbar-thumb": {
-									backgroundColor: "lightblue",
-									borderRadius: 1,
-								},
-							}}
-						>
-							<Table stickyHeader aria-label="sticky table">
-								<TableHead>
-									<TableRow>
-										{getColumnLabels(employees[0]).map((label, idx) => {
-											return (
-												<TableCell
-													key={label}
-													align="center"
-													style={{ minWidth: "170" }}
-													className={classes.tableCell}
-												>
-													{label.replaceAll("_", " ")}
-												</TableCell>
-											);
-										})}
-									</TableRow>
-								</TableHead>
-								{searchInput.name && filteredEmployees.length === 0 ? (
-									<NotFoundSVG />
-								) : (
-									<TableBody>
-										{(!!filteredEmployees.length
-											? filteredEmployees
-											: employees
-										)
-											.slice(
-												page * rowsPerPage,
-												page * rowsPerPage + rowsPerPage,
-											)
-											.map((employee) => {
+						{searchInput.name && filteredEmployees.length === 0 ? (
+							<div style={{ display: "flex", justifyContent: "center" }}>
+								<NotFoundSVG />
+							</div>
+						) : (
+							<TableContainer
+								sx={{
+									maxHeight: "90vh",
+									minHeight: "85vh",
+									"&::-webkit-scrollbar": {
+										width: 10,
+									},
+									"&::-webkit-scrollbar-track": {
+										backgroundColor: "transparent",
+									},
+									"&::-webkit-scrollbar-thumb": {
+										backgroundColor: "#2797ff",
+										borderRadius: 1,
+									},
+								}}
+							>
+								<Table stickyHeader aria-label="sticky table">
+									<TableHead>
+										<TableRow>
+											{getColumnLabels(employees[0]).map((label, idx) => {
 												return (
-													<TableRow
-														hover
-														role="checkbox"
-														tabIndex={-1}
-														key={employee.id}
+													<TableCell
+														key={label}
+														align="center"
+														style={{ minWidth: "170" }}
+														className={classes.tableCell}
 													>
-														{Object.values(employee).map((val, i) => {
-															return (
-																<TableCell key={val} align="center">
-																	{i === 0 ? (
-																		val[2] ? (
-																			<Link to={`/${val[1]}`}>{val[0]}</Link>
-																		) : (
-																			val[0]
-																		)
-																	) : (
-																		val || "-"
-																	)}
-																</TableCell>
-															);
-														})}
-													</TableRow>
+														{label.replaceAll("_", " ")}
+													</TableCell>
 												);
 											})}
-									</TableBody>
-								)}
-							</Table>
-						</TableContainer>
-						<TablePagination
-							rowsPerPageOptions={[10, 25, 100]}
-							component="div"
-							count={employees.length}
-							rowsPerPage={rowsPerPage}
-							page={page}
-							onPageChange={handleChangePage}
-							onRowsPerPageChange={handleChangeRowsPerPage}
-						/>
+										</TableRow>
+									</TableHead>
+									{
+										<TableBody>
+											{(!!filteredEmployees.length
+												? filteredEmployees
+												: employees
+											)
+												.slice(
+													page * rowsPerPage,
+													page * rowsPerPage + rowsPerPage,
+												)
+												.map((employee, index) => {
+													return (
+														<EmployeeTableRow
+															employee={employee}
+															index={index}
+														/>
+													);
+												})}
+										</TableBody>
+									}
+								</Table>
+							</TableContainer>
+						)}
+						{searchInput.name && filteredEmployees.length === 0 ? (
+							<p></p>
+						) : (
+							<TablePagination
+								rowsPerPageOptions={[10, 25, 100]}
+								component="div"
+								count={employees.length}
+								rowsPerPage={rowsPerPage}
+								page={page}
+								onPageChange={handleChangePage}
+								onRowsPerPageChange={handleChangeRowsPerPage}
+							/>
+						)}
 					</Paper>
 				</div>
 			}
