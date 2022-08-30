@@ -12,6 +12,7 @@ import {
 	Paper,
 	Typography,
 } from "@mui/material";
+import NotFoundSVG from "../../assets/NotFoundSVG";
 
 const EmployeeDetails = () => {
 	const { name } = useParams();
@@ -49,7 +50,18 @@ const EmployeeDetails = () => {
 	}
 
 	if (!Object.keys(employee).length) {
-		return <h1>Employee details not found</h1>;
+		return (
+			<>
+				<Typography variant="h2" align="center" marginTop="3rem">
+					Employee details not found
+				</Typography>
+				<Box
+					sx={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}
+				>
+					<NotFoundSVG />
+				</Box>
+			</>
+		);
 	}
 
 	return (
@@ -87,7 +99,7 @@ const EmployeeDetails = () => {
 									{emp[0].replaceAll("_", " ")}
 								</TableCell>
 								<TableCell component="th" scope="row" align="center">
-									{emp[1]}
+									{i === 5 ? `$${emp[1]}` : emp[1]}
 								</TableCell>
 							</TableRow>
 						))}

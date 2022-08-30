@@ -21,6 +21,8 @@ const EmployeeTableRow = ({ employee, index }) => {
 							) : (
 								val[0]
 							)
+						) : i === 6 ? (
+							`$${val}`
 						) : (
 							val || "-"
 						)}
