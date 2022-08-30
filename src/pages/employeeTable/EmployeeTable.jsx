@@ -170,7 +170,7 @@ export default function StickyHeadTable() {
 											{getColumnLabels(employees[0]).map((label, idx) => {
 												return (
 													<TableCell
-														key={label}
+														key={idx}
 														align="center"
 														style={{
 															minWidth: "170",
@@ -200,6 +200,7 @@ export default function StickyHeadTable() {
 														<EmployeeTableRow
 															employee={employee}
 															index={index}
+															key={employee.id[0]}
 														/>
 													);
 												})}
