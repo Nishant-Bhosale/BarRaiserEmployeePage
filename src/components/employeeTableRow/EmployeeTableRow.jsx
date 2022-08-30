@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 
 const EmployeeTableRow = ({ employee, index }) => {
 	const backgroundColor = index % 2 ? "#f1f1f1" : "white";
+
 	return (
 		<TableRow
 			hover
 			tabIndex={-1}
 			sx={{ backgroundColor: { backgroundColor } }}
-			key={employee.id}
+			key={index}
 		>
 			{Object.values(employee).map((val, i) => {
 				return (

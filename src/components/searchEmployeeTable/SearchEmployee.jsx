@@ -6,9 +6,10 @@ import {
 	TextField,
 	Box,
 	Typography,
+	Button,
 } from "@mui/material";
 
-const SearchEmployee = ({ input, search, designations, filterEmp }) => {
+const SearchEmployee = ({ input, search, designations, filterEmp, reset }) => {
 	const [designation, setDesignation] = useState(designations[0]);
 
 	const handleInput = (e) => {
@@ -26,10 +27,14 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 		setDesignation(e.target.value);
 	};
 
+	const resetDetails = () => {
+		reset();
+	};
+
 	return (
 		<>
 			<Typography variant="h4" marginBottom="2rem" align="center">
-				Search And Filter
+				Search And Filter Employees
 			</Typography>
 			<Box
 				sx={{
@@ -50,33 +55,37 @@ const SearchEmployee = ({ input, search, designations, filterEmp }) => {
 					id="search-name"
 				/>
 
-				<Box
+				<Select
+					id="demo-simple-select"
+					value={designation}
+					onChange={handleFilter}
 					sx={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
+						width: "224px",
+						margin: "1rem 2rem",
+						backgroundColor: "#0084ff",
+						color: "white",
 					}}
 				>
-					<Select
-						id="demo-simple-select"
-						value={designation}
-						onChange={handleFilter}
-						sx={{
-							width: "224px",
-							margin: "1rem 2rem",
-							backgroundColor: "#0084ff",
-							color: "white",
-						}}
-					>
-						{designations.map((designation) => {
-							return (
-								<MenuItem value={designation} key={designation}>
-									{designation}
-								</MenuItem>
-							);
-						})}
-					</Select>
-				</Box>
+					{designations.map((designation) => {
+						return (
+							<MenuItem value={designation} key={designation}>
+								{designation}
+							</MenuItem>
+						);
+					})}
+				</Select>
+
+				<Button
+					variant="contained"
+					onClick={resetDetails}
+					sx={{
+						marginLeft: "auto",
+						marginRight: "3rem",
+						marginTop: "1rem",
+					}}
+				>
+					Reset
+				</Button>
 			</Box>
 		</>
 	);

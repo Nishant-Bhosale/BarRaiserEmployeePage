@@ -100,6 +100,10 @@ export default function StickyHeadTable() {
 		setFilteredEmployees(filteredData);
 	};
 
+	const resetDetails = () => {
+		setSearchInput({ name: "", des: "All" });
+	};
+
 	useEffect(() => {
 		handleSearch(searchInput.name, searchInput.des);
 	}, [searchInput]);
@@ -126,6 +130,7 @@ export default function StickyHeadTable() {
 					search={setSearchInput}
 					designations={designations}
 					filterEmp={handleFilter}
+					reset={resetDetails}
 				/>
 			</div>
 			{
